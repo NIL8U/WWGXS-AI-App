@@ -1,3 +1,3 @@
 # GenXSays
-AI+Human Build Funny/Stupid GenX Saying Generator App. Enter a real life scenario or stupid made up one, and let us generate what GenX would say in that situation. Funny, snarky, snappy, smartassy - and then there is extra feral mode for the really sharp sarcastic and profile  with GenX bit responses.  Give it a go, tell your friends and come back 
-Powered by Feral GenX Creators - Caution, May Bit!
+AI+Human Build Funny/Stupid GenX Saying Generator App. Enter a real life scenario or stupid made up one, and let us generate what GenX would say in that situation. Funny, snarky, snappy, smartassy - and then there is extra feral mode for the really sharp sarcastic and profane shit with that GenX bite responses. Youll love it! Give it a go, tell your friends and come back 
+Powered by Feral GenX Creators - Caution, May bite ! 

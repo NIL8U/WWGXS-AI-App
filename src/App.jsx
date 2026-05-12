@@ -53,6 +53,10 @@ export default function App() {
           but everyone needed.
         </p>
 
+        <p className="subline">
+          Powered by sarcasm, latchkey survival, and unresolved 90s trauma.
+        </p>
+
         <div className="mode-toggle">
           <button
             className={mode === "classic" ? "active" : ""}

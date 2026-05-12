@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function App() {
   const [situation, setSituation] = useState("");
+  const [mode, setMode] = useState("classic");
   const [response, setResponse] = useState(
     "Type a situation, hit the button, and let GenX emotionally damage it."
   );
@@ -14,7 +15,11 @@ export default function App() {
     }
 
     setLoading(true);
-    setResponse("Consulting the council of mixtapes, mall food courts, and unresolved childhood trauma...");
+    setResponse(
+      mode === "feral"
+        ? "Unleashing Feral Mode. Somebody hide HR..."
+        : "Consulting the council of mixtapes, mall food courts, and unresolved childhood trauma..."
+    );
 
     try {
       const result = await fetch("/api/generate", {
@@ -23,7 +28,8 @@ export default function App() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          situation
+          situation,
+          mode
         })
       });
 
@@ -46,6 +52,24 @@ export default function App() {
           Enter a situation. Get the GenX response nobody asked for,
           but everyone needed.
         </p>
+
+        <div className="mode-toggle">
+          <button
+            className={mode === "classic" ? "active" : ""}
+            onClick={() => setMode("classic")}
+            type="button"
+          >
+            Classic
+          </button>
+
+          <button
+            className={mode === "feral" ? "active" : ""}
+            onClick={() => setMode("feral")}
+            type="button"
+          >
+            Feral Mode
+          </button>
+        </div>
 
         <textarea
           value={situation}

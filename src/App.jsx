@@ -3,22 +3,38 @@ import { useState } from "react";
 export default function App() {
   const [situation, setSituation] = useState("");
   const [response, setResponse] = useState(
-    "Whatever. Rub some dirt on it and make better choices."
+    "Type a situation, hit the button, and let GenX emotionally damage it."
   );
+  const [loading, setLoading] = useState(false);
 
-  const responses = [
-    "Sounds like a personal problem. Figure it out.",
-    "We survived drinking from garden hoses. He’ll live.",
-    "Back in our day we had jobs AND trauma.",
-    "Tell him motivation isn’t downloadable.",
-    "Funny how nobody wants a job until Taco Bell sounds good."
-  ];
+  async function generateResponse() {
+    if (!situation.trim()) {
+      setResponse("You gotta type something first. I'm sarcastic, not psychic.");
+      return;
+    }
 
-  function generateResponse() {
-    const random =
-      responses[Math.floor(Math.random() * responses.length)];
+    setLoading(true);
+    setResponse("Consulting the council of mixtapes, mall food courts, and unresolved childhood trauma...");
 
-    setResponse(random);
+    try {
+      const result = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          situation
+        })
+      });
+
+      const data = await result.json();
+
+      setResponse(data.response || "Whatever. The AI shrugged and walked away.");
+    } catch (error) {
+      setResponse("Something broke. Typical. Try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -37,8 +53,8 @@ export default function App() {
           placeholder="Example: My boss scheduled a meeting to discuss why we have too many meetings..."
         />
 
-        <button onClick={generateResponse}>
-          Generate GenX Response
+        <button onClick={generateResponse} disabled={loading}>
+          {loading ? "Generating..." : "Generate GenX Response"}
         </button>
 
         <div className="response">

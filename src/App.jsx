@@ -7,6 +7,7 @@ export default function App() {
     "Type a situation, hit the button, and let GenX emotionally damage it."
   );
   const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   async function generateResponse() {
     if (!situation.trim()) {
@@ -14,11 +15,13 @@ export default function App() {
       return;
     }
 
+    setCopied(false);
     setLoading(true);
+
     setResponse(
       mode === "feral"
         ? "Unleashing Feral Mode. Somebody hide HR..."
-        : "Consulting the council of mixtapes, mall food courts, and unresolved childhood trauma..."
+        : "Rewinding the cassette, blowing into the Nintendo cartridge, and consulting the mall food court elders..."
     );
 
     try {
@@ -43,9 +46,22 @@ export default function App() {
     }
   }
 
+  async function copyResponse() {
+    const text = `GenXSays:\n\n${response}\n\nTry it: https://wwgxs-ai-app.vercel.app`;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  }
+
   return (
     <main className="app">
       <section className="card">
+        <div className="badge">Latchkey AI Humor Engine</div>
+
         <h1>GenXSays</h1>
 
         <p className="tagline">
@@ -81,13 +97,17 @@ export default function App() {
           placeholder="Example: My boss scheduled a meeting to discuss why we have too many meetings..."
         />
 
-        <button onClick={generateResponse} disabled={loading}>
+        <button className="generate-button" onClick={generateResponse} disabled={loading}>
           {loading ? "Generating..." : "Generate GenX Response"}
         </button>
 
         <div className="response">
           <strong>GenX says:</strong>
           <p>{response}</p>
+
+          <button className="copy-button" onClick={copyResponse} type="button">
+            {copied ? "Copied. Go forth and annoy people." : "Copy Response"}
+          </button>
         </div>
       </section>
     </main>

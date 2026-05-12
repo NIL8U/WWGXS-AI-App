@@ -37,6 +37,14 @@ h1 {
   margin-bottom: 16px;
 }
 
+.subline {
+  color: #888;
+  font-size: 14px;
+  margin-top: -6px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
 .mode-toggle {
   display: flex;
   gap: 10px;
@@ -50,8 +58,8 @@ h1 {
 }
 
 .mode-toggle button.active {
-  background: white;
-  color: #111;
+  background: #ff5a36;
+  color: white;
 }
 
 textarea {
@@ -74,6 +82,11 @@ button {
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 .response {

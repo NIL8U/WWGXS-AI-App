@@ -1,7 +1,10 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #111;
+  background:
+    radial-gradient(circle at top left, rgba(255, 90, 54, 0.22), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(0, 255, 213, 0.16), transparent 35%),
+    #080808;
   color: white;
 }
 
@@ -15,71 +18,92 @@ body {
 
 .card {
   width: 100%;
-  max-width: 520px;
-  background: #1f1f1f;
-  border-radius: 20px;
-  padding: 24px;
+  max-width: 540px;
+  background: linear-gradient(180deg, #1c1c1c, #111);
+  border-radius: 26px;
+  padding: 28px;
   box-sizing: border-box;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 34px rgba(255, 90, 54, 0.14),
+    0 0 80px rgba(0, 255, 213, 0.08);
+}
+
+.badge {
+  display: inline-block;
+  background: #ff5a36;
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  margin-bottom: 18px;
 }
 
 h1 {
-  font-size: 52px;
-  margin-bottom: 12px;
+  font-size: 54px;
+  margin: 0 0 8px;
   font-weight: 900;
   letter-spacing: -2px;
   text-transform: uppercase;
 }
 
 .tagline {
-  color: #ccc;
+  color: #f2f2f2;
   line-height: 1.4;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .subline {
-  color: #888;
+  color: #aaa;
   font-size: 14px;
-  margin-top: -6px;
-  margin-bottom: 20px;
+  margin-top: 0;
+  margin-bottom: 22px;
   font-style: italic;
 }
 
 .mode-toggle {
   display: flex;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .mode-toggle button {
   flex: 1;
-  background: #333;
+  background: #303030;
   color: white;
 }
 
 .mode-toggle button.active {
   background: #ff5a36;
   color: white;
+  box-shadow: 0 0 18px rgba(255, 90, 54, 0.35);
 }
 
 textarea {
   width: 100%;
-  min-height: 120px;
-  margin-top: 16px;
-  padding: 12px;
-  border-radius: 12px;
+  min-height: 130px;
+  padding: 14px;
+  border-radius: 16px;
   border: none;
   font-size: 16px;
   box-sizing: border-box;
+  background: #f4f4f4;
+  color: #111;
+}
+
+textarea:focus {
+  outline: 3px solid #00ffd5;
 }
 
 button {
   width: 100%;
   margin-top: 16px;
-  padding: 14px;
+  padding: 15px;
   border: none;
-  border-radius: 12px;
-  font-weight: bold;
+  border-radius: 16px;
+  font-weight: 900;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -89,10 +113,26 @@ button:active {
   transform: scale(0.98);
 }
 
+.generate-button {
+  background: #00ffd5;
+  color: #111;
+}
+
 .response {
   margin-top: 20px;
   background: #2b2b2b;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 18px;
+  border-radius: 16px;
   line-height: 1.5;
+}
+
+.response strong {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.copy-button {
+  background: #444;
+  color: white;
+  margin-top: 12px;
 }

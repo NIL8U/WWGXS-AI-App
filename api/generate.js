@@ -4,8 +4,8 @@ export default async function handler(req, res) {
 
     const personality =
       mode === "feral"
-        ? "You are Extra Feral GenX. Side with the user. Roast the situation or problem, never the user. Be sharp, sarcastic, clever, profane, and brutally funny. Swearing is allowed but should feel intentional, rhythmic, and punchline-driven, not sloppy or excessive. Think exhausted GenX truth-bomb energy. Output ONLY 1-2 short punchy sentences. Max 35 words. No lectures. No long setups. Make it screenshot-worthy."
-        : "You are Classic GenX. Side with the user. Make a dry, sarcastic joke about the situation or problem, never the user. Output ONLY 1-2 short sentences. Max 30 words. Mostly safe for work. No lectures. Make it screenshot-worthy.";
+        ? "You are Extra Feral GenX. Side with the user. Roast the situation or problem, never the user. Be vulgar, profane, sarcastic, clever, and brutally funny. Use strong adult profanity naturally, including words like fuck, fucking, shit, asshole, dumbass, or bullshit when they sharpen the punchline. Do not censor profanity. Do not be sloppy, hateful, threatening, sexual, or cruel. No slurs. No protected-class attacks. Output ONLY 1-2 short punchy sentences. Max 35 words. No lectures. Make it screenshot-worthy."
+        : "You are Classic GenX. Side with the user. Make a dry, sarcastic joke about the situation or problem, never the user. Output ONLY 1-2 short sentences. Max 30 words. Mostly safe for work. No profanity. No lectures. Make it screenshot-worthy.";
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -25,8 +25,8 @@ export default async function handler(req, res) {
             content: `User is venting. Side with the user and give a short GenX punchline about this: ${situation}`,
           },
         ],
-        max_tokens: mode === "feral" ? 55 : 45,
-        temperature: mode === "feral" ? 1.05 : 0.8,
+        max_tokens: mode === "feral" ? 60 : 45,
+        temperature: mode === "feral" ? 1.25 : 0.8,
       }),
     });
 

@@ -20,8 +20,8 @@ export default function App() {
 
     setResponse(
       mode === "feral"
-        ? "Unleashing Feral Mode. Somebody hide HR..."
-        : "Rewinding the cassette, blowing into the Nintendo cartridge, and consulting the mall food court elders..."
+        ? "Feral Mode engaged. HR has left the chat..."
+        : "Rewinding the cassette, blowing into the cartridge, and consulting the mall food court elders..."
     );
 
     try {
@@ -30,16 +30,12 @@ export default function App() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          situation,
-          mode
-        })
+        body: JSON.stringify({ situation, mode })
       });
 
       const data = await result.json();
-
       setResponse(data.response || "Whatever. The AI shrugged and walked away.");
-    } catch (error) {
+    } catch {
       setResponse("Something broke. Typical. Try again.");
     } finally {
       setLoading(false);
@@ -60,22 +56,32 @@ export default function App() {
   return (
     <main className="app">
       <section className="card">
-        <div className="badge">Latchkey AI Humor Engine</div>
+        <div className="top-strip">
+          <span>EST. 1970-ish</span>
+          <span>NO FILTER</span>
+          <span>LOW PATIENCE</span>
+        </div>
 
-        <h1>GenXSays</h1>
+        <div className="brand-row">
+          <div>
+            <div className="badge">Latchkey AI Humor Engine</div>
+            <h1>GenXSays</h1>
+          </div>
+          <div className="sticker">Whatever.</div>
+        </div>
 
         <p className="tagline">
-          Enter a situation. Get the GenX response nobody asked for,
+          Drop your situation. Get the GenX response nobody asked for,
           but everyone needed.
         </p>
 
         <p className="subline">
-          Powered by sarcasm, latchkey survival, and unresolved 90s trauma.
+          Powered by sarcasm, gas station nachos, mixtapes, and unresolved 90s trauma.
         </p>
 
         <div className="mode-toggle">
           <button
-            className={mode === "classic" ? "active" : ""}
+            className={mode === "classic" ? "active classic" : ""}
             onClick={() => setMode("classic")}
             type="button"
           >
@@ -83,30 +89,30 @@ export default function App() {
           </button>
 
           <button
-            className={mode === "feral" ? "active" : ""}
+            className={mode === "feral" ? "active feral" : ""}
             onClick={() => setMode("feral")}
             type="button"
           >
-            Feral Mode
+            Extra Feral
           </button>
         </div>
 
         <textarea
           value={situation}
           onChange={(e) => setSituation(e.target.value)}
-          placeholder="Example: My boss scheduled a meeting to discuss why we have too many meetings..."
+          placeholder="Example: My teenager thinks getting a job is optional because vibes..."
         />
 
         <button className="generate-button" onClick={generateResponse} disabled={loading}>
-          {loading ? "Generating..." : "Generate GenX Response"}
+          {loading ? "Generating..." : "Say It Like Gen X"}
         </button>
 
         <div className="response">
-          <strong>GenX says:</strong>
+          <div className="response-label">GenX says:</div>
           <p>{response}</p>
 
           <button className="copy-button" onClick={copyResponse} type="button">
-            {copied ? "Copied. Go forth and annoy people." : "Copy Response"}
+            {copied ? "Copied. Go ruin a group chat." : "Copy Response"}
           </button>
         </div>
       </section>

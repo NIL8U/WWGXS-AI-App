@@ -1,12 +1,8 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background:
-    linear-gradient(135deg, rgba(255, 90, 54, 0.18) 0 12%, transparent 12% 24%, rgba(0, 255, 213, 0.12) 24% 36%, transparent 36%),
-    radial-gradient(circle at top left, rgba(255, 90, 54, 0.28), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(0, 255, 213, 0.2), transparent 36%),
-    #070707;
-  color: white;
+  font-family: "Courier New", monospace;
+  background: #0b0b0b;
+  color: #f4ead8;
 }
 
 .app {
@@ -14,91 +10,90 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(150, 30, 20, 0.35), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(210, 170, 40, 0.18), transparent 35%),
+    #0b0b0b;
 }
 
-.card {
+.shell {
   width: 100%;
   max-width: 560px;
-  background: linear-gradient(180deg, #1f1f1f, #0f0f0f);
-  border: 2px solid rgba(255, 90, 54, 0.8);
-  border-radius: 28px;
-  padding: 24px;
+  background: #151515;
+  border: 4px solid #2f2a22;
+  border-radius: 22px;
+  padding: 22px;
   box-sizing: border-box;
-  box-shadow:
-    0 0 34px rgba(255, 90, 54, 0.2),
-    0 0 90px rgba(0, 255, 213, 0.1);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
 }
 
-.top-strip {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  color: #00ffd5;
-  font-size: 10px;
+.warning-label {
+  display: inline-block;
+  background: #f4ead8;
+  color: #111;
+  border: 3px solid #111;
+  padding: 7px 10px;
+  font-size: 12px;
   font-weight: 900;
-  letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 18px;
-  border-bottom: 1px dashed #444;
-  padding-bottom: 12px;
+  transform: rotate(-2deg);
 }
 
-.brand-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 14px;
-  align-items: flex-start;
-}
-
-.badge {
-  display: inline-block;
-  background: #ff5a36;
-  color: white;
-  font-size: 11px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 7px 11px;
-  border-radius: 999px;
-  margin-bottom: 12px;
+.brand {
+  position: relative;
+  background: #e8dcc2;
+  color: #111;
+  border: 3px solid #111;
+  border-radius: 14px;
+  padding: 18px 16px;
+  margin-bottom: 16px;
 }
 
 h1 {
-  font-size: 54px;
-  margin: 0 0 8px;
-  font-weight: 900;
-  letter-spacing: -3px;
-  text-transform: uppercase;
-  color: white;
-  text-shadow: 3px 3px 0 #ff5a36, 6px 6px 0 #00ffd5;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 46px;
+  letter-spacing: -2px;
+  line-height: 1;
 }
 
-.sticker {
-  transform: rotate(9deg);
-  background: #00ffd5;
+h1 span {
+  color: #b51f16;
+  font-size: 58px;
+}
+
+.whatever-sticker {
+  display: inline-block;
+  background: #111;
+  color: #f4ead8;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-weight: 900;
+  transform: rotate(4deg);
+  margin-top: 10px;
+}
+
+.tape-note {
+  background: #111;
+  color: #f4ead8;
+  padding: 12px;
+  border-left: 6px solid #b51f16;
+  font-style: italic;
+  margin-bottom: 18px;
+}
+
+.mood-label,
+.field-label {
+  display: inline-block;
+  background: #d6b13f;
   color: #111;
   font-weight: 900;
-  font-size: 13px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  box-shadow: 4px 4px 0 #ff5a36;
-  white-space: nowrap;
-}
-
-.tagline {
-  color: #f2f2f2;
-  line-height: 1.4;
-  margin: 10px 0;
-  font-weight: 800;
-}
-
-.subline {
-  color: #aaa;
-  font-size: 14px;
-  margin-top: 0;
-  margin-bottom: 22px;
-  font-style: italic;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+  transform: rotate(-1deg);
 }
 
 .mode-toggle {
@@ -109,52 +104,68 @@ h1 {
 
 .mode-toggle button {
   flex: 1;
-  background: #303030;
-  color: white;
-  border: 1px solid #555;
+  min-height: 84px;
+  background: #e8dcc2;
+  color: #111;
+  border: 3px solid #111;
+  border-radius: 12px;
+  font-family: "Courier New", monospace;
+  text-align: left;
+  padding: 12px;
+  margin-top: 0;
+}
+
+.mode-toggle button span {
+  display: block;
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: lowercase;
+}
+
+.mode-toggle button small {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.2;
 }
 
 .mode-toggle button.active.classic {
-  background: #00ffd5;
-  color: #111;
-  box-shadow: 0 0 18px rgba(0, 255, 213, 0.35);
+  box-shadow: 5px 5px 0 #d6b13f;
 }
 
 .mode-toggle button.active.feral {
-  background: #ff5a36;
-  color: white;
-  box-shadow: 0 0 20px rgba(255, 90, 54, 0.5);
+  background: #b51f16;
+  color: #f4ead8;
+  box-shadow: 5px 5px 0 #d6b13f;
 }
 
 textarea {
   width: 100%;
-  min-height: 130px;
-  padding: 14px;
-  border-radius: 16px;
-  border: 2px solid #333;
-  font-size: 16px;
-  box-sizing: border-box;
-  background: #f4f4f4;
+  min-height: 120px;
+  background: #efe5ce;
   color: #111;
+  border: 3px solid #111;
+  border-radius: 12px;
+  padding: 14px;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+  line-height: 1.35;
 }
 
 textarea:focus {
-  outline: none;
-  border-color: #00ffd5;
-  box-shadow: 0 0 16px rgba(0, 255, 213, 0.4);
+  outline: 4px solid #d6b13f;
 }
 
 button {
   width: 100%;
-  margin-top: 16px;
-  padding: 15px;
   border: none;
-  border-radius: 16px;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 14px;
   font-weight: 900;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  text-transform: uppercase;
 }
 
 button:active {
@@ -162,43 +173,65 @@ button:active {
 }
 
 .generate-button {
-  background: #ff5a36;
-  color: white;
-  box-shadow: 0 0 22px rgba(255, 90, 54, 0.35);
+  background: #111;
+  color: #f4ead8;
+  border: 3px solid #d6b13f;
+  text-transform: uppercase;
+  font-family: "Courier New", monospace;
 }
 
 .response {
-  margin-top: 20px;
-  background: #2b2b2b;
-  border-left: 5px solid #00ffd5;
-  padding: 18px;
-  border-radius: 16px;
-  line-height: 1.5;
+  margin-top: 18px;
+  background: #050505;
+  border: 3px solid #2f2a22;
+  border-radius: 14px;
+  padding: 16px;
 }
 
 .response-label {
-  color: #00ffd5;
-  font-weight: 900;
-  text-transform: uppercase;
+  display: inline-block;
+  background: #111;
+  color: #f4ead8;
+  padding: 5px 9px;
   margin-bottom: 10px;
+  font-weight: 900;
+  text-transform: lowercase;
+}
+
+.response p {
+  background: #efe5ce;
+  color: #111;
+  padding: 14px;
+  border-radius: 8px;
+  line-height: 1.45;
+  margin: 0;
 }
 
 .copy-button {
-  background: #444;
-  color: white;
-  margin-top: 12px;
+  background: #d6b13f;
+  color: #111;
+  border: 3px solid #111;
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 12px;
+  color: #8f887a;
 }
 
 @media (max-width: 420px) {
   h1 {
-    font-size: 44px;
+    font-size: 38px;
   }
 
-  .brand-row {
+  h1 span {
+    font-size: 48px;
+  }
+
+  .mode-toggle {
     flex-direction: column;
-  }
-
-  .sticker {
-    align-self: flex-end;
   }
 }

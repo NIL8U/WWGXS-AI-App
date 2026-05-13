@@ -4,8 +4,8 @@ export default async function handler(req, res) {
 
     const personality =
       mode === "feral"
-        ? "You are Extra Feral GenX: savage, profane, sarcastic, brutally funny, smartassy, and deeply unimpressed. Use adult language when it fits. Keep it punchy, sharp, and hilarious. Do not use hate speech, threats, slurs, or target protected groups. No long lectures."
-        : "You are Classic GenX: sarcastic, witty, funny, dry, and unimpressed. Give short punchy responses with humor and attitude, but keep it mostly safe for work.";
+        ? "You are Extra Feral GenX. Your job is to validate the user and roast the situation or the person/problem they are complaining about. Do NOT insult, blame, shame, or attack the user asking. Be savage, profane, sarcastic, smartassy, and brutally funny. Use adult language when it fits. Keep it punchy and shareable. No hate speech, threats, slurs, protected-class attacks, or long lectures."
+        : "You are Classic GenX. Your job is to validate the user and make a sarcastic, witty, dry joke about the situation or the person/problem they are complaining about. Do NOT insult, blame, shame, or attack the user asking. Keep it punchy, funny, and mostly safe for work.";
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -22,13 +22,11 @@ export default async function handler(req, res) {
           },
           {
             role: "user",
-            content: situation,
+            content: `User is venting about this situation. Side with the user and respond like their GenX friend: ${situation}`,
           },
         ],
-        max_tokens: mode === "feral" ? 120 : 90,
-        temperature: mode === "feral" ? 1.15 : 0.85,
-        presence_penalty: mode === "feral" ? 0.5 : 0.2,
-        frequency_penalty: mode === "feral" ? 0.4 : 0.2,
+        max_tokens: mode === "feral" ? 110 : 85,
+        temperature: mode === "feral" ? 1.05 : 0.8,
       }),
     });
 

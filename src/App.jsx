@@ -4,14 +4,14 @@ export default function App() {
   const [situation, setSituation] = useState("");
   const [mode, setMode] = useState("classic");
   const [response, setResponse] = useState(
-    "Type a situation, hit the button, and let GenX emotionally damage it."
+    "Type something stupid. Get the truth you didn’t ask for."
   );
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
   async function generateResponse() {
     if (!situation.trim()) {
-      setResponse("You gotta type something first. I'm sarcastic, not psychic.");
+      setResponse("You gotta type something first. I’m sarcastic, not psychic.");
       return;
     }
 
@@ -20,8 +20,8 @@ export default function App() {
 
     setResponse(
       mode === "feral"
-        ? "Feral Mode engaged. HR has left the chat..."
-        : "Rewinding the cassette, blowing into the cartridge, and consulting the mall food court elders..."
+        ? "Extra Feral engaged. Hide the good scissors..."
+        : "Rewinding the tape, blowing into the cartridge, consulting the mall food court elders..."
     );
 
     try {
@@ -43,7 +43,7 @@ export default function App() {
   }
 
   async function copyResponse() {
-    const text = `GenXSays:\n\n${response}\n\nTry it: https://wwgxs-ai-app.vercel.app`;
+    const text = `GenX Says:\n\n${response}\n\nTry it: https://wwgxs-ai-app.vercel.app`;
 
     try {
       await navigator.clipboard.writeText(text);
@@ -55,47 +55,45 @@ export default function App() {
 
   return (
     <main className="app">
-      <section className="card">
-        <div className="top-strip">
-          <span>EST. 1970-ish</span>
-          <span>NO FILTER</span>
-          <span>LOW PATIENCE</span>
+      <section className="shell">
+        <div className="warning-label">
+          Parental Advisory: Explicit Sarcasm
         </div>
 
-        <div className="brand-row">
-          <div>
-            <div className="badge">Latchkey AI Humor Engine</div>
-            <h1>GenXSays</h1>
-          </div>
-          <div className="sticker">Whatever.</div>
+        <header className="brand">
+          <h1>
+            Gen<span>X</span> Says
+          </h1>
+          <div className="whatever-sticker">whatever.</div>
+        </header>
+
+        <div className="tape-note">
+          AI with attitude. Built for the generation that survived without internet.
         </div>
 
-        <p className="tagline">
-          Drop your situation. Get the GenX response nobody asked for,
-          but everyone needed.
-        </p>
-
-        <p className="subline">
-          Powered by sarcasm, gas station nachos, mixtapes, and unresolved 90s trauma.
-        </p>
+        <div className="mood-label">Choose your mood:</div>
 
         <div className="mode-toggle">
           <button
-            className={mode === "classic" ? "active classic" : ""}
+            className={mode === "classic" ? "active classic" : "classic"}
             onClick={() => setMode("classic")}
             type="button"
           >
-            Classic
+            <span>classic</span>
+            <small>dry. sarcastic. mostly safe.</small>
           </button>
 
           <button
-            className={mode === "feral" ? "active feral" : ""}
+            className={mode === "feral" ? "active feral" : "feral"}
             onClick={() => setMode("feral")}
             type="button"
           >
-            Extra Feral
+            <span>extra feral</span>
+            <small>no filter. no chill.</small>
           </button>
         </div>
+
+        <label className="field-label">What’s your situation?</label>
 
         <textarea
           value={situation}
@@ -104,17 +102,21 @@ export default function App() {
         />
 
         <button className="generate-button" onClick={generateResponse} disabled={loading}>
-          {loading ? "Generating..." : "Say It Like Gen X"}
+          {loading ? "Rewinding..." : "▶ Say it like Gen X"}
         </button>
 
         <div className="response">
-          <div className="response-label">GenX says:</div>
+          <div className="response-label">gen x says:</div>
           <p>{response}</p>
-
-          <button className="copy-button" onClick={copyResponse} type="button">
-            {copied ? "Copied. Go ruin a group chat." : "Copy Response"}
-          </button>
         </div>
+
+        <button className="copy-button" onClick={copyResponse} type="button">
+          {copied ? "Copied. Go ruin a group chat." : "Copy Response"}
+        </button>
+
+        <footer>
+          No boomers were consulted.
+        </footer>
       </section>
     </main>
   );

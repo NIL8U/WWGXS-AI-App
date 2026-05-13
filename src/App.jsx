@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App() {
   const [situation, setSituation] = useState("");
@@ -6,8 +6,30 @@ export default function App() {
   const [response, setResponse] = useState(
     "Type something stupid. Get the truth you didn’t ask for."
   );
+  const [displayedResponse, setDisplayedResponse] = useState(response);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (loading) {
+      setDisplayedResponse(response);
+      return;
+    }
+
+    setDisplayedResponse("");
+
+    let index = 0;
+    const interval = setInterval(() => {
+      setDisplayedResponse(response.slice(0, index + 1));
+      index++;
+
+      if (index >= response.length) {
+        clearInterval(interval);
+      }
+    }, 18);
+
+    return () => clearInterval(interval);
+  }, [response, loading]);
 
   async function generateResponse() {
     if (!situation.trim()) {
@@ -18,11 +40,22 @@ export default function App() {
     setCopied(false);
     setLoading(true);
 
-    setResponse(
+    const loadingLines =
       mode === "feral"
-        ? "Extra Feral engaged. Hide the good scissors..."
-        : "Rewinding the tape, blowing into the cartridge, consulting the mall food court elders..."
-    );
+        ? [
+            "Extra Feral engaged. Hide the good scissors...",
+            "Loading weapons-grade sarcasm...",
+            "HR has officially left the chat...",
+            "Applying vintage trauma and profanity..."
+          ]
+        : [
+            "Rewinding the tape...",
+            "Blowing into the cartridge...",
+            "Consulting the mall food court elders...",
+            "Adjusting emotional damage levels..."
+          ];
+
+    setResponse(loadingLines[Math.floor(Math.random() * loadingLines.length)]);
 
     try {
       const result = await fetch("/api/generate", {
@@ -105,9 +138,12 @@ export default function App() {
           {loading ? "Rewinding..." : "▶ Say it like Gen X"}
         </button>
 
-        <div className="response">
+        <div className={loading ? "response loading" : "response"}>
           <div className="response-label">gen x says:</div>
-          <p>{response}</p>
+          <p>
+            {displayedResponse}
+            {!loading && <span className="cursor">|</span>}
+          </p>
         </div>
 
         <button className="copy-button" onClick={copyResponse} type="button">

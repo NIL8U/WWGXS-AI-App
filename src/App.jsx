@@ -8,11 +8,12 @@ export default function App() {
   );
   const [displayedResponse, setDisplayedResponse] = useState(response);
   const [loading, setLoading] = useState(false);
+  const [thinkingStep, setThinkingStep] = useState("");
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (loading) {
-      setDisplayedResponse(response);
+      setDisplayedResponse(thinkingStep);
       return;
     }
 
@@ -26,10 +27,10 @@ export default function App() {
       if (index >= response.length) {
         clearInterval(interval);
       }
-    }, 18);
+    }, 22);
 
     return () => clearInterval(interval);
-  }, [response, loading]);
+  }, [response, loading, thinkingStep]);
 
   async function generateResponse() {
     if (!situation.trim()) {
@@ -40,22 +41,31 @@ export default function App() {
     setCopied(false);
     setLoading(true);
 
-    const loadingLines =
+    const steps =
       mode === "feral"
         ? [
-            "Extra Feral engaged. Hide the good scissors...",
             "Loading weapons-grade sarcasm...",
-            "HR has officially left the chat...",
-            "Applying vintage trauma and profanity..."
+            "Disabling the filter nobody asked for...",
+            "Checking if HR is still in the building...",
+            "Adding just enough profanity to make it useful..."
           ]
         : [
-            "Rewinding the tape...",
-            "Blowing into the cartridge...",
+            "Rewinding the cassette...",
+            "Blowing into the Nintendo cartridge...",
             "Consulting the mall food court elders...",
-            "Adjusting emotional damage levels..."
+            "Applying dry sarcasm and emotional distance..."
           ];
 
-    setResponse(loadingLines[Math.floor(Math.random() * loadingLines.length)]);
+    let stepIndex = 0;
+    setThinkingStep(steps[stepIndex]);
+
+    const thinkingInterval = setInterval(() => {
+      stepIndex++;
+
+      if (stepIndex < steps.length) {
+        setThinkingStep(steps[stepIndex]);
+      }
+    }, 650);
 
     try {
       const result = await fetch("/api/generate", {
@@ -67,11 +77,17 @@ export default function App() {
       });
 
       const data = await result.json();
-      setResponse(data.response || "Whatever. The AI shrugged and walked away.");
+
+      clearInterval(thinkingInterval);
+
+      setTimeout(() => {
+        setLoading(false);
+        setResponse(data.response || "Whatever. The AI shrugged and walked away.");
+      }, 400);
     } catch {
-      setResponse("Something broke. Typical. Try again.");
-    } finally {
+      clearInterval(thinkingInterval);
       setLoading(false);
+      setResponse("Something broke. Typical. Try again.");
     }
   }
 
@@ -135,14 +151,16 @@ export default function App() {
         />
 
         <button className="generate-button" onClick={generateResponse} disabled={loading}>
-          {loading ? "Rewinding..." : "▶ Say it like Gen X"}
+          {loading ? "Processing sarcasm..." : "▶ Say it like Gen X"}
         </button>
 
         <div className={loading ? "response loading" : "response"}>
-          <div className="response-label">gen x says:</div>
+          <div className="response-label">
+            {loading ? "loading sarcasm:" : "gen x says:"}
+          </div>
           <p>
             {displayedResponse}
-            {!loading && <span className="cursor">|</span>}
+            <span className="cursor">|</span>
           </p>
         </div>
 

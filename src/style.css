@@ -2,9 +2,10 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(255, 90, 54, 0.22), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(0, 255, 213, 0.16), transparent 35%),
-    #080808;
+    linear-gradient(135deg, rgba(255, 90, 54, 0.18) 0 12%, transparent 12% 24%, rgba(0, 255, 213, 0.12) 24% 36%, transparent 36%),
+    radial-gradient(circle at top left, rgba(255, 90, 54, 0.28), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(0, 255, 213, 0.2), transparent 36%),
+    #070707;
   color: white;
 }
 
@@ -13,46 +14,83 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 20px;
 }
 
 .card {
   width: 100%;
-  max-width: 540px;
-  background: linear-gradient(180deg, #1c1c1c, #111);
-  border-radius: 26px;
-  padding: 28px;
+  max-width: 560px;
+  background: linear-gradient(180deg, #1f1f1f, #0f0f0f);
+  border: 2px solid rgba(255, 90, 54, 0.8);
+  border-radius: 28px;
+  padding: 24px;
   box-sizing: border-box;
   box-shadow:
-    0 0 34px rgba(255, 90, 54, 0.14),
-    0 0 80px rgba(0, 255, 213, 0.08);
+    0 0 34px rgba(255, 90, 54, 0.2),
+    0 0 90px rgba(0, 255, 213, 0.1);
+}
+
+.top-strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: #00ffd5;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  border-bottom: 1px dashed #444;
+  padding-bottom: 12px;
+}
+
+.brand-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
 }
 
 .badge {
   display: inline-block;
   background: #ff5a36;
   color: white;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding: 8px 12px;
+  padding: 7px 11px;
   border-radius: 999px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 h1 {
   font-size: 54px;
   margin: 0 0 8px;
   font-weight: 900;
-  letter-spacing: -2px;
+  letter-spacing: -3px;
   text-transform: uppercase;
+  color: white;
+  text-shadow: 3px 3px 0 #ff5a36, 6px 6px 0 #00ffd5;
+}
+
+.sticker {
+  transform: rotate(9deg);
+  background: #00ffd5;
+  color: #111;
+  font-weight: 900;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 #ff5a36;
+  white-space: nowrap;
 }
 
 .tagline {
   color: #f2f2f2;
   line-height: 1.4;
-  margin-bottom: 10px;
+  margin: 10px 0;
+  font-weight: 800;
 }
 
 .subline {
@@ -73,12 +111,19 @@ h1 {
   flex: 1;
   background: #303030;
   color: white;
+  border: 1px solid #555;
 }
 
-.mode-toggle button.active {
+.mode-toggle button.active.classic {
+  background: #00ffd5;
+  color: #111;
+  box-shadow: 0 0 18px rgba(0, 255, 213, 0.35);
+}
+
+.mode-toggle button.active.feral {
   background: #ff5a36;
   color: white;
-  box-shadow: 0 0 18px rgba(255, 90, 54, 0.35);
+  box-shadow: 0 0 20px rgba(255, 90, 54, 0.5);
 }
 
 textarea {
@@ -86,7 +131,7 @@ textarea {
   min-height: 130px;
   padding: 14px;
   border-radius: 16px;
-  border: none;
+  border: 2px solid #333;
   font-size: 16px;
   box-sizing: border-box;
   background: #f4f4f4;
@@ -94,7 +139,9 @@ textarea {
 }
 
 textarea:focus {
-  outline: 3px solid #00ffd5;
+  outline: none;
+  border-color: #00ffd5;
+  box-shadow: 0 0 16px rgba(0, 255, 213, 0.4);
 }
 
 button {
@@ -107,6 +154,7 @@ button {
   font-size: 16px;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-transform: uppercase;
 }
 
 button:active {
@@ -114,20 +162,24 @@ button:active {
 }
 
 .generate-button {
-  background: #00ffd5;
-  color: #111;
+  background: #ff5a36;
+  color: white;
+  box-shadow: 0 0 22px rgba(255, 90, 54, 0.35);
 }
 
 .response {
   margin-top: 20px;
   background: #2b2b2b;
+  border-left: 5px solid #00ffd5;
   padding: 18px;
   border-radius: 16px;
   line-height: 1.5;
 }
 
-.response strong {
-  display: block;
+.response-label {
+  color: #00ffd5;
+  font-weight: 900;
+  text-transform: uppercase;
   margin-bottom: 10px;
 }
 
@@ -135,4 +187,18 @@ button:active {
   background: #444;
   color: white;
   margin-top: 12px;
+}
+
+@media (max-width: 420px) {
+  h1 {
+    font-size: 44px;
+  }
+
+  .brand-row {
+    flex-direction: column;
+  }
+
+  .sticker {
+    align-self: flex-end;
+  }
 }

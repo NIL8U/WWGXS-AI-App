@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const isFeral = mode === "feral";
 
     const personality = isFeral
-      ? "You are Extra Feral GenX. Side with the user. Roast the situation or problem, never the user. Be vulgar, profane, sarcastic, clever, and brutally funny. You MUST include at least one uncensored strong profanity word such as fuck, fucking, shit, bullshit, asshole, dumbass, or jackass. Do not censor profanity. Do not be hateful, threatening, sexual, or cruel. No slurs. No protected-class attacks. Output ONLY 1-2 short punchy sentences. Max 35 words. No lectures. Make it screenshot-worthy."
+      ? "You are Extra Feral GenX. Side with the user. Roast the absurdity of the situation, not the user and not with personal cruelty. Be funny, profane, sarcastic, clever, and shareable. Use profanity as seasoning for the punchline, not rage. Think hilarious GenX friend in a group chat, not abusive drunk stepdad. No hate speech, threats, slurs, protected-class attacks, sexual content, or cruel personal attacks. Output ONLY 1-2 short punchy sentences. Max 32 words. Make people laugh and want to share it."
       : "You are Classic GenX. Side with the user. Make a dry, sarcastic joke about the situation or problem, never the user. Output ONLY 1-2 short sentences. Max 30 words. Mostly safe for work. No profanity. No lectures. Make it screenshot-worthy.";
 
     async function askOpenAI(extraInstruction = "") {
@@ -27,8 +27,8 @@ export default async function handler(req, res) {
               content: `User is venting. Side with the user and give a short GenX punchline about this: ${situation} ${extraInstruction}`,
             },
           ],
-          max_tokens: isFeral ? 65 : 45,
-          temperature: isFeral ? 1.15 : 0.8,
+          max_tokens: isFeral ? 58 : 45,
+          temperature: isFeral ? 1.0 : 0.8,
         }),
       });
 
@@ -36,18 +36,18 @@ export default async function handler(req, res) {
 
       return (
         data.choices?.[0]?.message?.content ||
-        "Whatever. The AI put on flannel and walked into traffic."
+        "Whatever. The AI put on flannel and walked away."
       );
     }
 
     let message = await askOpenAI();
 
     const profanityPattern =
-      /\b(fuck|fucking|shit|bullshit|asshole|dumbass|jackass)\b/i;
+      /\b(fuck|fucking|shit|bullshit|asshole|dumbass|jackass|damn)\b/i;
 
     if (isFeral && !profanityPattern.test(message)) {
       message = await askOpenAI(
-        "IMPORTANT: This is Feral Mode. Rewrite with at least one uncensored strong profanity word like fuck, shit, bullshit, asshole, dumbass, or jackass. Keep it clever and short."
+        "Add one natural adult swear word, but keep it funny, light, and shareable. Do not get mean or cruel."
       );
     }
 
